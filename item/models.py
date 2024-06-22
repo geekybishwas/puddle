@@ -25,7 +25,7 @@ class Item(models.Model):
     class Meta:
         # It order's the result by the name in ascending order
         ordering=('name',)
-        verbose_name_plural='Categories'
+        verbose_name_plural='Items'
 
     def __str__(self):
         return self.name

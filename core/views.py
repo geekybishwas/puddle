@@ -6,6 +6,7 @@ def index(request):
     # Getting the item which is not sold ,the [0:6] only retrieves the first 6 instances
     items=Item.objects.filter(is_sold=False)[0:6]
     categories=Category.objects.all()
+    
     return render(request,'core/index.html',{
         'categories':categories,
         'items':items,
