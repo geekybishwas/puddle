@@ -1,9 +1,15 @@
 from django.shortcuts import render
-
+from item.models import Category,Item
 # Create your views here.
 
 def index(request):
-    return render(request,'core/index.html')
+    # Getting the item which is not sold ,the [0:6] only retrieves the first 6 instances
+    items=Item.objects.filter(is_sold=False)[0:6]
+    categories=Category.objects.all()
+    return render(request,'core/index.html',{
+        'categories':categories,
+        'items':items,
+    })
 
 def contact(request):
     return render(request,'core/contact.html')
