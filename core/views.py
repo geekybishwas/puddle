@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from item.models import Category,Item
 
 from .forms import SignupForm
@@ -18,6 +18,17 @@ def contact(request):
     return render(request,'core/contact.html')
 
 def signup(request):
+    if request.method=='POST':
+        # Creating a instance of SignupForm
+        form=SignupForm(request.POST)
+
+        # Checking if the form is valid or not by running validation rules defined in the SignupForm
+        if form.is_valid():
+            # It saves the data, it involves creating a new user object in the database based on the form field(username,email,password)
+            form.save()
+
+            return redirect('/login/')
+
     form=SignupForm()
     return render(request,'core/signup.html',{
         'form':form
