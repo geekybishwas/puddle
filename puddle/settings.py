@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# When a user attempts to access a protected resources(a page require authentication), it redirect them to this url
+LOGIN_URL='/login/'
+# It determines where a user will be redirected after successfully logging in
+LOGIN_REDIRECT_URL='/'
+# This specifies the url where a user will be redirected after successfully logging out
+LOGOUT_REDIRECT_URL='/'
 
 # Application definition
 
