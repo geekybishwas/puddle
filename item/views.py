@@ -12,13 +12,10 @@ def items(request):
     category_id=request.GET.get('category',0)
     items=Item.objects.filter(is_sold=False)
 
-    # if category_id:
-    #     try:
-    #         category=Category.objects.get(pk=category_id)
-    #         items=items.filter(category=category)
-    #     # items=items.filter(category_id==category_id)
-    #     except Category.DoesNotExist:
-    #         pass
+
+    if category_id:
+        # Using the double underscore(__) allows us to filter on the primary key of the related 'Category' model
+        items=items.filter(category__id=category_id)
 
     if query:
         items=items.filter(Q(name__icontains=query) | Q(description__icontains=query))
@@ -27,7 +24,7 @@ def items(request):
         'items':items,
         'query':query,
         'categories':categories,
-        'category_id':int(category_id)
+        'category_id': int(category_id) if category_id else None
     })
 
 
